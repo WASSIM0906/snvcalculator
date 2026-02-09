@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SNV Average</title>
+</head>
+<body>
+<header class="header">
+    <h1>SNV L1 Average Calculator</h1>
+    <p>L1 Sciences de la Nature et de la Vie</p>
+    <button id="themeBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
+</header>
+
+<!-- SEMESTER SWITCH BUTTONS -->
+<div class="tabs">
+    <button class="tab active" onclick="showSemester(1)">Semester 1</button>
+    <button class="tab" onclick="showSemester(2)">Semester 2</button>
+</div>
+
+<!-- SEMESTER 1 -->
+<div id="semester1" class="semester show">
+    <!-- Paste all your Semester 1 module cards here -->
+    
+    <!-- CALCULATE BUTTON AT THE BOTTOM -->
+    <button onclick="calcS1()">Calculate Semester 1</button>
+    <h3 id="resS1"></h3>
+</div>
+
+<!-- SEMESTER 2 -->
+<div id="semester2" class="semester">
+    <!-- Paste all your Semester 2 module cards here -->
+    
+    <!-- CALCULATE BUTTON AT THE BOTTOM -->
+    <button onclick="calcS2()">Calculate Semester 2</button>
+    <h3 id="resS2"></h3>
+</div>
+
+<script src="script.js"></script>
+
+<h1>SNV L1 Average Calculator</h1>
+
+</body>
+</html>
+<head>
+    <title>SNV Average</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SNV L1 Average</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SNV L1 Average Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+<h2>Semester 1</h2>
+
+<div class="module">
+Biologie Cellulaire (Coef 4)<br>
+TD: <input id="s1_bio_td" type="number">
+TP: <input id="s1_bio_tp" type="number">
+Exam: <input id="s1_bio_exam" type="number">
+</div>
+
+<div class="module">
+Math Statistique (Coef 2)<br>
+TD: <input id="s1_math_td" type="number">
+Exam: <input id="s1_math_exam" type="number">
+</div>
+
+<div class="module">
+Chimie Générale (Coef 3)<br>
+TD: <input id="s1_chim_td" type="number">
+TP: <input id="s1_chim_tp" type="number">
+Exam: <input id="s1_chim_exam" type="number">
+</div>
+
+<div class="module">
+Géologie (Coef 3)<br>
+TD: <input id="s1_geo_td" type="number">
+TP: <input id="s1_geo_tp" type="number">
+Exam: <input id="s1_geo_exam" type="number">
+</div>
+
+<div class="module">
+Technique de Communication 1 (Coef 2)<br>
+TD: <input id="s1_tc_td" type="number">
+Exam: <input id="s1_tc_exam" type="number">
+</div>
+
+<div class="module">
+Méthode de Travail 1 (Coef 2)<br>
+TD: <input id="s1_mtd_td" type="number">
+Exam: <input id="s1_mtd_exam" type="number">
+</div>
+
+<div class="module">
+Histoire des Sciences (Coef 1)<br>
+Exam: <input id="s1_hist_exam" type="number">
+</div>
+
+<button onclick="calcS1()">Calculate Semester 1</button>
+<h3 id="resS1"></h3>
+
+<hr>
+
+<h2>Semester 2</h2>
+
+<div class="module">
+    Thermodynamique et Chimie des Solutions (Coef 3)<br>
+    TD: <input id="s2_thermo_td" type="number">
+    TP: <input id="s2_thermo_tp" type="number">
+    Exam: <input id="s2_thermo_exam" type="number">
+</div>
+
+
+<div class="module">
+Biologie Végétale (Coef 3)<br>
+TP: <input id="s2_veg_tp" type="number">
+Exam: <input id="s2_veg_exam" type="number">
+</div>
+
+<div class="module">
+Biologie Animale (Coef 3)<br>
+TP: <input id="s2_anim_tp" type="number">
+Exam: <input id="s2_anim_exam" type="number">
+</div>
+
+<div class="module">
+    Physique (Coef 3)<br>
+    TD: <input id="s2_phy_td" type="number">
+    TP: <input id="s2_phy_tp" type="number">
+    Exam: <input id="s2_phy_exam" type="number">
+</div>
+
+
+<div class="module">
+Technique de Communication 2 (Coef 2)<br>
+TD: <input id="s2_tc_td" type="number">
+Exam: <input id="s2_tc_exam" type="number">
+</div>
+
+<div class="module">
+Sciences de la Vie (Coef 2)<br>
+TD: <input id="s2_snv_td" type="number">
+Exam: <input id="s2_snv_exam" type="number">
+</div>
+
+<div class="module">
+Méthode de Travail 2 (Coef 1)<br>
+Exam: <input id="s2_mtd_exam" type="number">
+</div>
+
+<button onclick="calcS2()">Calculate Semester 2</button>
+<h3 id="resS2"></h3>
+
+<script src="script.js"></script>
+</body>
+</html>
+<div class="bg-selector">
+    <label>Background Theme: </label>
+    <select id="bgTheme" onchange="changeBackground()">
+        <option value="gradient">Gradient</option>
+        <option value="gradientAnim">Animated Gradient</option>
+        <option value="pattern">Pattern</option>
+        <option value="image">Image</option>
+    </select>
+</div>

@@ -1,0 +1,358 @@
+body {
+    font-family: Arial;
+    background: #f0f0f0;
+    text-align: center;
+}
+body {
+    font-family: Arial;
+    background: #f4f4f4;
+    padding: 20px;
+}
+
+.module {
+    background: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+input {
+    width: 60px;
+    margin: 5px;
+}
+
+button {
+    padding: 10px;
+    margin-top: 10px;
+    background: #1e90ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+/* ===== GENERAL RESET ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #e8f5f0, #f7fdfb);
+    padding: 20px;
+}
+
+/* ===== HEADER ===== */
+.header {
+    background: linear-gradient(135deg, #0f766e, #10b981);
+    color: white;
+    text-align: center;
+    padding: 30px 15px;
+    border-radius: 12px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 28px;
+    animation: fadeDown 1s ease;
+}
+
+/* ===== TABS ===== */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 15px;
+}
+
+.tab {
+    padding: 10px 22px;
+    border-radius: 25px;
+    border: 2px solid #10b981;
+    background: white;
+    color: #10b981;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tab:hover {
+    transform: translateY(-2px);
+}
+
+.tab.active {
+    background: #10b981;
+    color: white;
+}
+
+/* ===== SEMESTER SECTIONS ===== */
+.semester {
+    display: none;
+    max-width: 700px;
+    margin: auto;
+    padding: 15px;
+    animation: fadeSlide 0.5s ease;
+}
+
+.semester.show {
+    display: block;
+}
+
+/* ===== MODULE CARDS ===== */
+.module {
+    background: white;
+    border-radius: 14px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    transition: 0.3s;
+}
+
+.module:hover {
+    transform: scale(1.01);
+}
+
+/* ===== INPUTS ===== */
+input {
+    width: 65px;
+    padding: 6px;
+    margin: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* ===== BUTTONS ===== */
+button {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #0f766e;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== OPTIONAL: SMALL TEXT ===== */
+.header p {
+    margin-top: 6px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #e8f5f0, #f7fdfb);
+    padding: 20px;
+    transition: background 0.5s, color 0.5s;
+}
+
+/* ===== DARK MODE ===== */
+body.dark {
+    background: #121212;
+    color: #e0e0e0;
+}
+
+body.dark .module {
+    background: #1e1e1e;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+body.dark .tab {
+    background: #333;
+    color: #10b981;
+    border-color: #10b981;
+}
+
+body.dark .tab.active {
+    background: #10b981;
+    color: #fff;
+}
+
+/* ===== HEADER ===== */
+.header {
+    background: linear-gradient(135deg, #0f766e, #10b981);
+    color: white;
+    text-align: center;
+    padding: 30px 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 28px;
+    animation: fadeDown 1s ease;
+}
+
+.header p {
+    margin-top: 6px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+#themeBtn {
+    margin-top: 10px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* ===== TABS ===== */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 15px;
+}
+
+.tab {
+    padding: 10px 22px;
+    border-radius: 25px;
+    border: 2px solid #10b981;
+    background: white;
+    color: #10b981;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tab:hover {
+    transform: translateY(-2px);
+}
+
+.tab.active {
+    background: #10b981;
+    color: white;
+}
+
+/* ===== SEMESTER SECTIONS ===== */
+.semester {
+    display: none;
+    max-width: 700px;
+    margin: auto;
+    padding: 15px;
+    animation: fadeSlide 0.5s ease;
+}
+
+.semester.show {
+    display: block;
+}
+
+/* ===== MODULE CARDS ===== */
+.module {
+    background: white;
+    border-radius: 14px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    transition: 0.3s, transform 0.3s;
+}
+
+.module:hover {
+    transform: scale(1.01);
+}
+
+/* ===== INPUTS ===== */
+input {
+    width: 65px;
+    padding: 6px;
+    margin: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* ===== BUTTONS ===== */
+button {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #0f766e;
+}
+
+/* ===== RESULT COLORS ===== */
+.result.pass {
+    color: green;
+}
+
+.result.fail {
+    color: red;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* BACKGROUND THEMES */
+body.gradient {
+    background: linear-gradient(135deg, #e8f5f0, #f7fdfb);
+}
+
+body.gradientAnim {
+    background: linear-gradient(270deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
+    background-size: 800% 800%;
+    animation: gradientBG 15s ease infinite;
+}
+
+body.pattern {
+    background-image: repeating-linear-gradient(
+        45deg,
+        #e8f5f0,
+        #e8f5f0 10px,
+        #f7fdfb 10px,
+        #f7fdfb 20px
+    );
+}
+
+body.image {
+    background-image: url('https://images.unsplash.com/photo-1601758123927-0f7e3a1b1d7f?auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+/* ANIMATION FOR GRADIENT */
+@keyframes gradientBG {
+    0% {background-position:0% 50%}
+    50% {background-position:100% 50%}
+    100% {background-position:0% 50%}
+}
