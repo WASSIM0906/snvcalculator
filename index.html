@@ -1,177 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>SNV Average</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SNV L1 Average Calculator</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="header">
-    <h1>SNV L1 Average Calculator</h1>
-    <p>L1 Sciences de la Nature et de la Vie</p>
-    <button id="themeBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
-</header>
+  <!-- Theme toggle -->
+  <button id="themeToggle" onclick="toggleTheme()">🌙</button>
 
-<!-- SEMESTER SWITCH BUTTONS -->
-<div class="tabs">
-    <button class="tab active" onclick="showSemester(1)">Semester 1</button>
-    <button class="tab" onclick="showSemester(2)">Semester 2</button>
+  <h1>SNV L1 Average Calculator</h1>
+
+  <!-- Semester Buttons -->
+  <div class="buttons">
+    <button onclick="showSemester(1)">Semester 1</button>
+    <button onclick="showSemester(2)">Semester 2</button>
+  </div>
+
+  <!-- Semester 1 -->
+  <div id="semester1" class="semester">
+    <h2>Semester 1 Modules</h2>
+
+    <label class="biologie">Biologie cellulaire (TP + TD + Exam, coef 4):</label>
+    <input type="number" placeholder="TP" min="0" max="20">
+    <input type="number" placeholder="TD" min="0" max="20">
+    <input type="number" placeholder="Exam" min="0" max="20">
+
+    <label class="chimie">Chimie générale et organique (TP + TD + Exam, coef 3):</label>
+    <input type="number" placeholder="TP" min="0" max="20">
+    <input type="number" placeholder="TD" min="0" max="20">
+    <input type="number" placeholder="Exam" min="0" max="20">
+
+    <label class="biologie">Geology (TP + TD + Exam, coef 3):</label>
+    <input type="number" placeholder="TP" min="0" max="20">
+    <input type="number" placeholder="TD" min="0" max="20">
+    <input type="number" placeholder="Exam" min="0" max="20">
+
+    <label class="mathematics">Mathematique statistique (TD + Exam, coef 2):</label>
+    <input type="number" placeholder="TD" min="0" max="20">
+    <input type="number" placeholder="Exam" min="0" max="20">
+
+    <label class="method">Methode de travail et terminologie (TD + Exam, coef 2):</label>
+    <input type="number" placeholder="TD" min="0" max="20">
+    <input type="number" placeholder="Exam" min="0" max="20">
+
+    <label class="communication">Technique de communication et d'expression (TD + Exam, coef 2):</label>
+    <input type="number" placeholder="TD" min="0" max="20">
+    <input type="number" placeholder="Exam" min="0" max="20">
+
+    <label class="history">Histoire universelle des sciences biologiques (Exam, coef 1):</label>
+    <input type="number" placeholder="Exam" min="0" max="20">
+
+    <button onclick="calculateSemester(1)">Calculate Semester 1</button>
+    <div id="result1"></div>
+  </div>
+
+  <!-- Semester 2 -->
+  <div id="semester2" class="semester">
+    <h2>Semester 2 Modules</h2>
+
+    <label class="biologie">Biologie végétale (TP + Exam, coef 3):</label>
+    <input type="number" placeholder="TP" min="0" max="20">
+    <input type="number" placeholder="Exam" min="0" max="20">
+
+    <label class="biologie">Biologie animale (TP + Exam, coef 3):</label>
+    <input type="number" placeholder="TP" min="0" max="20">
+    <input type="number" placeholder="Exam" min="0" max="20">
+
+    <label class="physique">Physique (TP + TD + Exam, coef 3):</label>
+    <input type="number" placeholder="TP" min="0" max="20">
+    <input type="number" placeholder="TD" min="0" max="20">
+    <input type="number" placeholder="Exam" min="0" max="20">
+
+    <label class="communication">Technique de communication et d'expression 2 (TD + Exam, coef 2):</label>
+    <input type="number" placeholder="TD" min="0" max="20">
+    <input type="number" placeholder="Exam" min="0" max="20">
+
+    <label class="svie">Sciences de la vie et impacts socio-économiques (TD + Exam, coef 2):</label>
+    <input type="number" placeholder="TD" min="0" max="20">
+    <input type="number" placeholder="Exam" min="0" max="20">
+
+    <label class="method">Methode de travail et terminologie 2 (Exam, coef 1):</label>
+    <input type="number" placeholder="Exam" min="0" max="20">
+
+    <label class="chimie">Thermodynamique et chimie des solutions (TP + TD + Exam, coef 3):</label>
+    <input type="number" placeholder="TP" min="0" max="20">
+    <input type="number" placeholder="TD" min="0" max="20">
+    <input type="number" placeholder="Exam" min="0" max="20">
+
+    <button onclick="calculateSemester(2)">Calculate Semester 2</button>
+    <div id="result2"></div>
+  </div>
+
+  <!-- Annual Average -->
+ <!-- Annual Average -->
+<div id="annualAverage" class="semester" style="display:block;">
+  <h2>Annual Average</h2>
+  <button onclick="calculateAnnual()">Calculate Annual Average</button>
+  <div id="resultAnnual"></div>
+
+  <!-- New button for S1+S2 with Admis/Ajourné -->
+  <button onclick="calculateAnnualDecision()">S1 + S2</button>
+  <div id="resultDecision"></div>
 </div>
 
-<!-- SEMESTER 1 -->
-<div id="semester1" class="semester show">
-    <!-- Paste all your Semester 1 module cards here -->
-    
-    <!-- CALCULATE BUTTON AT THE BOTTOM -->
-    <button onclick="calcS1()">Calculate Semester 1</button>
-    <h3 id="resS1"></h3>
-</div>
 
-<!-- SEMESTER 2 -->
-<div id="semester2" class="semester">
-    <!-- Paste all your Semester 2 module cards here -->
-    
-    <!-- CALCULATE BUTTON AT THE BOTTOM -->
-    <button onclick="calcS2()">Calculate Semester 2</button>
-    <h3 id="resS2"></h3>
-</div>
-
-<script src="script.js"></script>
-
-<h1>SNV L1 Average Calculator</h1>
-
+  <script src="script.js"></script>
 </body>
 </html>
-<head>
-    <title>SNV Average</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>SNV L1 Average</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>SNV L1 Average Calculator</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-
-<h2>Semester 1</h2>
-
-<div class="module">
-Biologie Cellulaire (Coef 4)<br>
-TD: <input id="s1_bio_td" type="number">
-TP: <input id="s1_bio_tp" type="number">
-Exam: <input id="s1_bio_exam" type="number">
-</div>
-
-<div class="module">
-Math Statistique (Coef 2)<br>
-TD: <input id="s1_math_td" type="number">
-Exam: <input id="s1_math_exam" type="number">
-</div>
-
-<div class="module">
-Chimie Générale (Coef 3)<br>
-TD: <input id="s1_chim_td" type="number">
-TP: <input id="s1_chim_tp" type="number">
-Exam: <input id="s1_chim_exam" type="number">
-</div>
-
-<div class="module">
-Géologie (Coef 3)<br>
-TD: <input id="s1_geo_td" type="number">
-TP: <input id="s1_geo_tp" type="number">
-Exam: <input id="s1_geo_exam" type="number">
-</div>
-
-<div class="module">
-Technique de Communication 1 (Coef 2)<br>
-TD: <input id="s1_tc_td" type="number">
-Exam: <input id="s1_tc_exam" type="number">
-</div>
-
-<div class="module">
-Méthode de Travail 1 (Coef 2)<br>
-TD: <input id="s1_mtd_td" type="number">
-Exam: <input id="s1_mtd_exam" type="number">
-</div>
-
-<div class="module">
-Histoire des Sciences (Coef 1)<br>
-Exam: <input id="s1_hist_exam" type="number">
-</div>
-
-<button onclick="calcS1()">Calculate Semester 1</button>
-<h3 id="resS1"></h3>
-
-<hr>
-
-<h2>Semester 2</h2>
-
-<div class="module">
-    Thermodynamique et Chimie des Solutions (Coef 3)<br>
-    TD: <input id="s2_thermo_td" type="number">
-    TP: <input id="s2_thermo_tp" type="number">
-    Exam: <input id="s2_thermo_exam" type="number">
-</div>
-
-
-<div class="module">
-Biologie Végétale (Coef 3)<br>
-TP: <input id="s2_veg_tp" type="number">
-Exam: <input id="s2_veg_exam" type="number">
-</div>
-
-<div class="module">
-Biologie Animale (Coef 3)<br>
-TP: <input id="s2_anim_tp" type="number">
-Exam: <input id="s2_anim_exam" type="number">
-</div>
-
-<div class="module">
-    Physique (Coef 3)<br>
-    TD: <input id="s2_phy_td" type="number">
-    TP: <input id="s2_phy_tp" type="number">
-    Exam: <input id="s2_phy_exam" type="number">
-</div>
-
-
-<div class="module">
-Technique de Communication 2 (Coef 2)<br>
-TD: <input id="s2_tc_td" type="number">
-Exam: <input id="s2_tc_exam" type="number">
-</div>
-
-<div class="module">
-Sciences de la Vie (Coef 2)<br>
-TD: <input id="s2_snv_td" type="number">
-Exam: <input id="s2_snv_exam" type="number">
-</div>
-
-<div class="module">
-Méthode de Travail 2 (Coef 1)<br>
-Exam: <input id="s2_mtd_exam" type="number">
-</div>
-
-<button onclick="calcS2()">Calculate Semester 2</button>
-<h3 id="resS2"></h3>
-
-<script src="script.js"></script>
-</body>
-</html>
-<div class="bg-selector">
-    <label>Background Theme: </label>
-    <select id="bgTheme" onchange="changeBackground()">
-        <option value="gradient">Gradient</option>
-        <option value="gradientAnim">Animated Gradient</option>
-        <option value="pattern">Pattern</option>
-        <option value="image">Image</option>
-    </select>
-</div>

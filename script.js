@@ -1,127 +1,105 @@
-function m(cc, exam) {
-    return cc * 0.4 + exam * 0.6;
+let semester1Avg = null;
+let semester2Avg = null;
+
+function showSemester(sem) {
+  let s1 = document.getElementById("semester1");
+  let s2 = document.getElementById("semester2");
+
+  s1.classList.remove("show"); s2.classList.remove("show");
+  s1.style.display = "none"; s2.style.display = "none";
+
+  if(sem===1){ s1.style.display="block"; setTimeout(()=>s1.classList.add("show"),10); }
+  if(sem===2){ s2.style.display="block"; setTimeout(()=>s2.classList.add("show"),10); }
 }
 
-function calcS1() {
-    let total =
-        m((+s1_bio_td.value + +s1_bio_tp.value)/2, s1_bio_exam.value) * 4 +
-        m(s1_math_td.value, s1_math_exam.value) * 2 +
-        m((+s1_chim_td.value + +s1_chim_tp.value)/2, s1_chim_exam.value) * 3 +
-        m((+s1_geo_td.value + +s1_geo_tp.value)/2, s1_geo_exam.value) * 3 +
-        m(s1_tc_td.value, s1_tc_exam.value) * 2 +
-        m(s1_mtd_td.value, s1_mtd_exam.value) * 2 +
-        s1_hist_exam.value * 1;
+function calculateSemester(sem) {
+  let total=0,sumCoef=0;
+  let resultDiv=document.getElementById(`result${sem}`);
+  resultDiv.classList.remove("show");
 
-    let avg = total / 17;
-    resS1.innerText = "Semester 1 Average = " + avg.toFixed(2);
+  let inputs, elems, i=0;
+  if(sem===1){
+    inputs=[
+      {coef:4,TP:true,TD:true,Exam:true},
+      {coef:3,TP:true,TD:true,Exam:true},
+      {coef:3,TP:true,TD:true,Exam:true},
+      {coef:2,TP:false,TD:true,Exam:true},
+      {coef:2,TP:false,TD:true,Exam:true},
+      {coef:2,TP:false,TD:true,Exam:true},
+      {coef:1,TP:false,TD:false,Exam:true}
+    ];
+    elems=document.querySelectorAll('#semester1 input');
+  } else {
+    inputs=[
+      {coef:3,TP:true,TD:false,Exam:true},
+      {coef:3,TP:true,TD:false,Exam:true},
+      {coef:3,TP:true,TD:true,Exam:true},
+      {coef:2,TP:false,TD:true,Exam:true},
+      {coef:2,TP:false,TD:true,Exam:true},
+      {coef:1,TP:false,TD:false,Exam:true},
+      {coef:3,TP:true,TD:true,Exam:true}
+    ];
+    elems=document.querySelectorAll('#semester2 input');
+  }
+
+  i=0;
+  inputs.forEach(mod=>{
+    let tp=mod.TP ? parseFloat(elems[i++].value)||0:0;
+    let td=mod.TD ? parseFloat(elems[i++].value)||0:0;
+    let exam=mod.Exam ? parseFloat(elems[i++].value)||0:0;
+
+    let tpTdAvg = (mod.TP || mod.TD) ? (tp+td)/(mod.TP && mod.TD ? 2 : 1) : 0;
+    let moduleAvg = (mod.TP || mod.TD) ? tpTdAvg*0.4 + exam*0.6 : exam;
+
+    total += moduleAvg*mod.coef;
+    sumCoef += mod.coef;
+  });
+
+  let average = (total/sumCoef).toFixed(2);
+
+  if(sem===1) semester1Avg=parseFloat(average);
+  if(sem===2) semester2Avg=parseFloat(average);
+
+  if(average>=10) resultDiv.innerHTML=`<p style="color:green">Average: ${average} →  ✅</p>`;
+  else resultDiv.innerHTML=`<p style="color:red">Average: ${average} →  ❌</p>`;
+
+  setTimeout(()=>resultDiv.classList.add("show"),10);
 }
 
-function calcS2() {
-    let total =
-        m(s2_thermo_cc.value, s2_thermo_exam.value) * 3 +
-        m(s2_veg_tp.value, s2_veg_exam.value) * 3 +
-        m(s2_anim_tp.value, s2_anim_exam.value) * 3 +
-        m(s2_phy_cc.value, s2_phy_exam.value) * 3 +
-        m(s2_tc_td.value, s2_tc_exam.value) * 2 +
-        m(s2_snv_td.value, s2_snv_exam.value) * 2 +
-        s2_mtd_exam.value * 1;
+function calculateAnnual(){
+  let resultDiv=document.getElementById("resultAnnual");
+  resultDiv.classList.remove("show");
 
-    let avg = total / 17;
-    resS2.innerText = "Semester 2 Average = " + avg.toFixed(2);
-}
-/* ===== SEMESTER SWITCH ===== */
-function showSemester(n) {
-    document.getElementById("semester1").classList.remove("show");
-    document.getElementById("semester2").classList.remove("show");
+  if(semester1Avg===null || semester2Avg===null){
+    resultDiv.innerHTML=`<p style="color:red">Please calculate both semesters first!</p>`;
+  } else {
+    let annual=((semester1Avg+semester2Avg)/2).toFixed(2);
+    let color=annual>=10?"green":"red";
+    let comment=annual>=10?"Bshtk ✅":"ayayay ❌";
+    resultDiv.innerHTML=`<p style="color:${color}">Annual Average: ${annual} → ${comment}</p>`;
+  }
 
-    document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
-
-    document.getElementById("semester" + n).classList.add("show");
-    document.querySelectorAll(".tab")[n - 1].classList.add("active");
+  setTimeout(()=>resultDiv.classList.add("show"),10);
 }
 
-/* ===== DARK / LIGHT THEME ===== */
-function toggleTheme() {
-    document.body.classList.toggle("dark");
-    const btn = document.getElementById("themeBtn");
-    if(document.body.classList.contains("dark")) {
-        btn.innerText = "☀️ Light Mode";
-    } else {
-        btn.innerText = "🌙 Dark Mode";
-    }
+function toggleTheme(){
+  document.body.classList.toggle("dark-mode");
+  let btn=document.getElementById("themeToggle");
+  btn.textContent=document.body.classList.contains("dark-mode")?"☀️":"🌙";
 }
+function calculateAnnualDecision() {
+  let resultDiv = document.getElementById("resultDecision");
+  resultDiv.classList.remove("show");
 
-/* ===== HELPER: MODULE CALC ===== */
-function m(cc, exam) {
-    return cc*0.4 + exam*0.6;
-}
+  if (semester1Avg === null || semester2Avg === null) {
+    resultDiv.innerHTML = `<p style="color:red">Please calculate both semesters first!</p>`;
+  } else {
+    let annual = ((semester1Avg + semester2Avg)/2).toFixed(2);
+    let color = annual >= 10 ? "green" : "red";
+    let comment = annual >= 10 ? "Admis ✅" : "Ajourné ❌";
 
-/* ===== SEMESTER 1 CALC ===== */
-function calcS1() {
-    // Replace with your actual Semester 1 input IDs
-    let total =
-        m((+s1_bio_td.value + +s1_bio_tp.value)/2, s1_bio_exam.value) * 4 +
-        m(s1_math_td.value, s1_math_exam.value) * 2 +
-        m((+s1_chim_td.value + +s1_chim_tp.value)/2, s1_chim_exam.value) * 3 +
-        m((+s1_geo_td.value + +s1_geo_tp.value)/2, s1_geo_exam.value) * 3 +
-        m(s1_tc_td.value, s1_tc_exam.value) * 2 +
-        m(s1_mtd_td.value, s1_mtd_exam.value) * 2 +
-        s1_hist_exam.value * 1;
+    resultDiv.innerHTML = `<p style="color:${color}; font-weight:bold">Annual (S1+S2)/2: ${annual} → ${comment}</p>`;
+  }
 
-    let avg = total / 17;
-    const res = document.getElementById("resS1");
-
-    if(avg >= 10){
-        res.innerHTML = `<span class="result pass">Bshtek yal khebache - ${avg.toFixed(2)}</span>`;
-    } else {
-        res.innerHTML = `<span class="result fail">Nod t9ra - ${avg.toFixed(2)}</span>`;
-    }
-}
-
-/* ===== SEMESTER 2 CALC ===== */
-function calcS2() {
-    // Replace with your actual Semester 2 input IDs
-    let total =
-m((+s2_thermo_td.value + +s2_thermo_tp.value)/2, s2_thermo_exam.value) * 3 +
-        m(s2_veg_tp.value, s2_veg_exam.value) * 3 +
-        m(s2_anim_tp.value, s2_anim_exam.value) * 3 +
-m((+s2_phy_td.value + +s2_phy_tp.value)/2, s2_phy_exam.value) * 3 +
-        m(s2_tc_td.value, s2_tc_exam.value) * 2 +
-        m(s2_snv_td.value, s2_snv_exam.value) * 2 +
-        s2_mtd_exam.value * 1;
-
-    let avg = total / 17;
-    const res = document.getElementById("resS2");
-
-    if(avg >= 10){
-        res.innerHTML = `<span class="result pass">Bshtek yal khebache - ${avg.toFixed(2)}</span>`;
-    } else {
-        res.innerHTML = `<span class="result fail">Nod t9ra - ${avg.toFixed(2)}</span>`;
-    }
-}
-function showSemester(n) {
-    const sem1 = document.getElementById("semester1");
-    const sem2 = document.getElementById("semester2");
-    const tabs = document.querySelectorAll(".tab");
-
-    // Hide both semesters
-    sem1.classList.remove("show");
-    sem2.classList.remove("show");
-
-    // Remove active class from all buttons
-    tabs.forEach(b => b.classList.remove("active"));
-
-    // Show selected semester and highlight button
-    if(n === 1){
-        sem1.classList.add("show");
-        tabs[0].classList.add("active");
-    } else {
-        sem2.classList.add("show");
-        tabs[1].classList.add("active");
-    }
-}
-function changeBackground() {
-    const theme = document.getElementById("bgTheme").value;
-    document.body.classList.remove("gradient", "gradientAnim", "pattern", "image");
-    document.body.classList.add(theme);
+  setTimeout(() => resultDiv.classList.add("show"), 10);
 }
